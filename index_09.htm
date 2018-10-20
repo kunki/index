@@ -421,6 +421,7 @@ var OnCat=function()
 var Init=function()
 {
 	document.getElementById("version").innerHTML = GetVersion();
+	document.getElementById("charcount").innerHTML = '（'+charset.length+'字）';
 	document.getElementById("New").style.display = (ie > 7) ? "" : "none";
 	document.getElementById("Old").style.display = (ie > 7) ? "none" : "";
 	document.getElementById("variant").checked = GetCookie("variant", "1") == "1";
