@@ -108,9 +108,10 @@ document.addEventListener('DOMContentLoaded', function() {
 	for (var key in charset) {
 		$('#selectpicker').append("<option>"+key+"</option>");
 	}
-    	// selectpicker onchange
+		// selectpicker onchange
 	$('#selectpicker').change(function() {
-		ref = "title='U+$UCH$' href='http://www.mebag.com/index/main/List.asp?key1="+$('#selectpicker').val()+"&key3=$ENC$&key4=entry' target='_blank'";
+		var book_name = ($('#selectpicker').val() == 'all') ? '' : $('#selectpicker').val();
+		ref = "title='U+$UCH$' href='http://www.mebag.com/index/main/List.asp?key1="+book_name+"&key3=$ENC$&key4=entry' target='_blank'";
 	});
 });
 </script>
