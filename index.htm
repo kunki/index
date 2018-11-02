@@ -1,4 +1,12 @@
-﻿<html><head><title>部件檢索</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head><body>
+﻿<html><head><title>部件檢索</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="https://cdn.bootcss.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.bootcss.com/bootstrap-select/1.13.2/css/bootstrap-select.min.css" rel="stylesheet">
+<link href="https://cdn.bootcss.com/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js" defer></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/4.1.2/js/bootstrap.bundle.min.js" defer></script>
+<script src="https://cdn.bootcss.com/bootstrap-select/1.13.2/js/bootstrap-select.min.js" defer></script>
+<script src="http://www.mebag.com/index/js/bootstrap-select/1.13.2/js/i18n/defaults-zh.min.js" defer></script>
+</head><body style="padding: 20px">
 
 <!----------------------------------------------------------------------------->
 <!-- 客製化修改區起始 -->
@@ -6,13 +14,17 @@
 
 <!-- UI 畫面區 -->
 <style>
-a{text-decoration:none}a:link{color:#1257F9}a:visited{color:#1257F9}a:hover{color:#FF00FF}
+a{text-decoration:none}a:link{color:#1257F9}a:visited{color:#1257F9}a:hover{color:#FF00FF;text-decoration:none}
 .Key{border-left:1px solid #FFFFFF;border-top:1px solid #FFFFFF;border-right:1px solid #808080;border-bottom:1px solid #808080;padding:0px 2px 0px 1px;font-size:90%}
 </style>
-<hr size=10 color=#C0C0C0>
-<font size=+2 color=#0000FF style="font-family:標楷體">部件檢索 - </font><font color=#FF0080>98598</font>字<font style="font-family:FMing-p,FMing-1,FMing-2,FMing-3,FMing-F,FSung-p,FSung-1,FSung-2,FSung-3,FSung-F,Calibri,PMingLiU,PMingLiU-ExtB"/>
+<a href="javascript:history.back()"><img src="http://www.mebag.com/index/images/2016logo_h50.png" alt="" height="50" width="43"></a>
+<font size=+2 color=#0000FF style="font-family:標楷體">部件檢索  - </font><select id="selectpicker" class="selectpicker" data-width="fit" data-live-search="true">
+<option value="all">引得市</option>
+<option data-divider="true"></option>
+</select>專用版
+<font style="font-family:FMing-p,FMing-1,FMing-2,FMing-3,FMing-F,FSung-p,FSung-1,FSung-2,FSung-3,FSung-F,Calibri,PMingLiU,PMingLiU-ExtB,HanaMinA,HanaMinB"/>
 <hr color=#C0C0C0>
-<span style='margin-left:4em;text-indent:-3em;display:block'><font color=#000088>部件</font>：<span id="New"><input id="input" oninput="FindMatch(99,true)" onkeydown="OnKey(event.keyCode)" style="font-family:FMing-m,FMing-1,FMing-2,FMing-3,FMing-F,FSung-m,FSung-1,FSung-2,FSung-3,FSung-F,MingLiU,MingLiU-ExtB;font-size:18px"></input></span><span id="Old" style='display:none'><input id="input7" onpropertychange="FindMatch(99,true)" onkeydown="OnKey(event.keyCode)" style="font-family:FMing-m,FMing-1,FMing-2,FMing-3,FMing-F,FSung-m,FSung-1,FSung-2,FSung-3,FSung-F,MingLiU,MingLiU-ExtB;font-size:18px"></input></span><a href="#" onclick="ClearFind()" style="vertical-align:5%;border:1px solid #707070;padding:2px 3px 1px 2px;border-radius:5px;background-color:#E0E0E0" title="清除"><b>☓</b></a><a href="#" onclick="Backspace()" style="vertical-align:5%;border:1px solid #707070;padding:2px 7px 1px 6px;border-radius:5px;background-color:#E0E0E0" title="倒退">◃</a><a href="#" onclick="Decompose()" style="vertical-align:5%;border:1px solid #707070;padding:2px 8px 1px 9px;border-radius:5px;background-color:#E0E0E0" title="解構"><b>\</b></a><a href="#" onclick="FindMatch(999,false)" style="vertical-align:5%;border:1px solid #707070;padding:2px 6px 1px 8px;border-radius:5px;background-color:#E0E0E0" title="查詢">▶</a>　⌘ <span id="FnKey"></span></span>
+<span style='margin-left:4em;text-indent:-3em;display:block'><font color=#000088>部件</font>：<span id="New"><input id="input" oninput="FindMatch(99,true)" onkeydown="OnKey(event.keyCode)" style="font-family:FMing-m,FMing-1,FMing-2,FMing-3,FMing-F,FSung-m,FSung-1,FSung-2,FSung-3,FSung-F,MingLiU,MingLiU-ExtB;font-size:18px"></input></span><span id="Old" style='display:none'><input id="input7" onpropertychange="FindMatch(99,true)" onkeydown="OnKey(event.keyCode)" style="font-family:FMing-m,FMing-1,FMing-2,FMing-3,FMing-F,FSung-m,FSung-1,FSung-2,FSung-3,FSung-F,MingLiU,MingLiU-ExtB;font-size:18px"></input></span><button class="btn btn-default" onclick="ClearFind()" style="width:30px;vertical-align:5%;border:1px solid #707070;padding:2px 7px 1px 6px;border-radius:5px;background-color:#E0E0E0" title="清除"><b><i class="zmdi zmdi-delete"></i></b></button><button class="btn btn-default" onclick="Backspace()" style="width:30px;vertical-align:5%;border:1px solid #707070;padding:2px 7px 1px 6px;border-radius:5px;background-color:#E0E0E0" title="倒退"><i class="zmdi zmdi-chevron-left"></i></button><button class="btn btn-default" onclick="Decompose()" style="width:30px;vertical-align:5%;border:1px solid #707070;padding:2px 8px 1px 9px;border-radius:5px;background-color:#E0E0E0" title="解構"><b><i class="zmdi zmdi-scissors"></i></b></button><button class="btn btn-default" onclick="FindMatch(999,false)" style="width:30px;vertical-align:5%;border:1px solid #707070;padding:2px 6px 1px 8px;border-radius:5px;background-color:#E0E0E0" title="查詢"><i class="zmdi zmdi-search"></i></button>　⌘ <span id="FnKey"></span></span>
 <span style='margin-left:4em;text-indent:-3em;display:block'><font color=#600060>選項</font>：<input type="checkbox" id="variant" checked="checked" onclick="OnVar()">包容異體</input>&nbsp;<input type="checkbox" id="onthefly" checked="checked" onclick="OnFly()">即時查詢</input>&nbsp;<input type="checkbox" id="largefont" onclick="OnFnt()">較大字形</input>&nbsp;<input type="checkbox" id="copymode" onclick="OnCpy()">複製模式</input></span>
 <span style='margin-left:4em;text-indent:-3em;display:block'><font color=#000088>字數</font>：<font color=#696969><span id="total"></span></font></span>
 <hr color=#C0C0C0>
@@ -91,6 +103,19 @@ a{text-decoration:none}a:link{color:#1257F9}a:visited{color:#1257F9}a:hover{colo
 
 <!-- UI 程式區 -->
 <script>
+var charset={};
+document.addEventListener('DOMContentLoaded', function() {
+	for (var key in charset) {
+		$('#selectpicker').append("<option>"+key+"</option>");
+	}
+    	// selectpicker onchange
+	$('#selectpicker').change(function() {
+		ref = "title='U+$UCH$' href='http://www.mebag.com/index/main/List.asp?key1="+$('#selectpicker').val()+"&key3=$ENC$&key4=entry' target='_blank'";
+	});
+});
+</script>
+<script src="charset.js" defer></script>
+<script>
 // Global 變數
 var ver = navigator.userAgent.toLowerCase().match(/msie ([\d.]+)/);
 var ie = ver ? parseInt(ver[1]) : 9;
@@ -100,8 +125,7 @@ var did = (window.name.slice(0, 3) == "if_") ? parseInt(window.name.slice(3)) : 
 // $UCD$ 表示漢字的10進制Unicode變數
 // $UCh$ 表示漢字的16進制小寫Unicode變數
 // $UCH$ 表示漢字的16進制大寫Unicode變數
-var ref = did ? ("href='content://mdict.cn/entry/"+did+"/$CHR$'") :
-	"title='U+$UCH$' href='http://www.unicode.org/cgi-bin/GetUnihanData.pl?codepoint=$ENC$' target='_blank'";
+var ref = "title='U+$UCH$' href='http://www.mebag.com/index/main/List.asp?key3=$ENC$&key4=entry' target='_blank'";
 var cpy = "title='U+$UCH$' href='#1' onclick='SetClipBoard(\"$CHR$\")'";
 var ime = 0;
 
@@ -274,7 +298,11 @@ var SetFnKey=function(w)
 var MakeBlock=function(w, c, m, a, t)
 {
 	var f = (m < 0) ? "#0045FF" : (m ? "#404040" : "#FF4500");
-	return ("<a style='border:1px solid #C0C0C0;color:"+f+";background:"+GetBGC(c)+"' ondblclick='SetFnKey(\""+w+"\")' "+a+">"+t+"</a>");
+	var isreturn = (m < 0) || ($('#selectpicker').val() == 'all') || (charset[$('#selectpicker').val()].indexOf(t) >= 0);
+	if (isreturn)
+	{
+		return ("<a style='border:1px solid #C0C0C0;color:"+f+";background:"+GetBGC(c)+"' ondblclick='SetFnKey(\""+w+"\")' "+a+">"+t+"</a>");
+	}
 };
 
 // 部件檢索
@@ -460,8 +488,8 @@ var Init=function()
 	document.getElementById("Old").style.display = (ie > 7) ? "none" : "";
 	document.getElementById("variant").checked = GetCookie("variant", "1") == "1";
 	document.getElementById("onthefly").checked = GetCookie("onthefly", "1") == "1";
-	document.getElementById("largefont").checked = GetCookie("largefont", "0") == "1";
-	document.getElementById("copymode").checked = GetCookie("copymode", "1") == "1";
+	document.getElementById("largefont").checked = GetCookie("largefont", "1") == "1";
+	document.getElementById("copymode").checked = GetCookie("copymode", "0") == "1";
 	document.getElementById((ie > 7) ? "input" : "input7").addEventListener('compositionstart', function(){ ime = true; });
 	document.getElementById((ie > 7) ? "input" : "input7").addEventListener('compositionend', function(){ setTimeout(function(){ ime = false; FindMatch(99,true); }, 1); });
 
