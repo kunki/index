@@ -22,7 +22,7 @@ a{text-decoration:none}a:link{color:#1257F9}a:visited{color:#1257F9}a:hover{colo
 <font size=+2 color=#0000FF style="font-family:標楷體">部件檢索  - </font><select id="selectpicker" class="selectpicker" data-width="fit" data-size="10" data-live-search="true">
 <option value="all">引得市</option>
 <option data-divider="true"></option>
-</select>專用版
+</select>專用版（<span id="charcount" style="color:#FF0080"></span>字）
 </div>
 <font style="font-family:Arial,FMing-p,FMing-1,FMing-2,FMing-3,FMing-F,FSung-p,FSung-1,FSung-2,FSung-3,FSung-F,Calibri,PMingLiU,PMingLiU-ExtB,HanaMinA,HanaMinB"/>
 <hr color=#C0C0C0>
@@ -110,9 +110,17 @@ document.addEventListener('DOMContentLoaded', function() {
 	for (var key in charset) {
 		$('#selectpicker').append("<option>"+key+"</option>");
 	}
-		// selectpicker onchange
+	$('#charcount').html(dt.length);
+	// selectpicker onchange
 	$('#selectpicker').change(function() {
-		var book_name = ($('#selectpicker').val() == 'all') ? '' : $('#selectpicker').val();
+		var book_name;
+		if ($('#selectpicker').val() == 'all') {
+			book_name = '';
+			$('#charcount').html(dt.length);
+		} else {
+			book_name = $('#selectpicker').val();
+			$('#charcount').html(charset[$('#selectpicker').val()].length);
+		}
 		ref = "title='U+$UCH$' href='http://www.mebag.com/index/main/List.asp?key1="+book_name+"&key3=$ENC$&key4=entry' target='_blank'";
 	});
 });
