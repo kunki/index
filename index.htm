@@ -107,9 +107,9 @@ a{text-decoration:none}a:link{color:#1257F9}a:visited{color:#1257F9}a:hover{colo
 <script>
 var charset={};
 document.addEventListener('DOMContentLoaded', function() {
-	for (var key in charset) {
+	Object.keys(charset).sort().forEach(function(key) {
 		$('#selectpicker').append("<option>"+key+"</option>");
-	}
+	});
 	$('#charcount').html(dt.length);
 	// selectpicker onchange
 	$('#selectpicker').change(function() {
