@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			$('#charcount').html(charset[$('#selectpicker').val()].length);
 		}
 		if (hashcode(book_name) === 0x4096AAB1) {
-			ref = "title='U+$UCH$' href='http://www.mebag.com/index/shuowen/list.asp?&key3=$ENC$&key4=name' target='_blank'";
+			ref = "title='U+$UCH$' href='http://www.mebag.com/index/shuowen/list.asp?key3=$ENC$&key4=name' target='_blank'";
 		} else {
 			ref = "title='U+$UCH$' href='http://www.mebag.com/index/main/list.asp?key1="+book_name+"&key3=$ENC$&key4=entry' target='_blank'";
 		}
