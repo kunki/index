@@ -121,7 +121,11 @@ document.addEventListener('DOMContentLoaded', function() {
 			book_name = $('#selectpicker').val();
 			$('#charcount').html(charset[$('#selectpicker').val()].length);
 		}
-		ref = "title='U+$UCH$' href='http://www.mebag.com/index/main/list.asp?key1="+book_name+"&key3=$ENC$&key4=entry' target='_blank'";
+		if (hashcode(book_name) === 0x4096AAB1) {
+			ref = "title='U+$UCH$' href='http://www.mebag.com/index/shuowen/list.asp?key3=$ENC$&key4=name' target='_blank'";
+		} else {
+			ref = "title='U+$UCH$' href='http://www.mebag.com/index/main/list.asp?key1="+book_name+"&key3=$ENC$&key4=entry' target='_blank'";
+		}
 	});
 });
 </script>
@@ -139,6 +143,17 @@ var did = (window.name.slice(0, 3) == "if_") ? parseInt(window.name.slice(3)) : 
 var ref = "title='U+$UCH$' href='http://www.mebag.com/index/main/list.asp?key3=$ENC$&key4=entry' target='_blank'";
 var cpy = "title='U+$UCH$' href='#1' onclick='SetClipBoard(\"$CHR$\")'";
 var ime = 0;
+
+function hashcode(str) {
+	var hash = 0, i, chr, len;
+	if (str.length === 0) return hash;
+	for (i = 0, len = str.length; i < len; i++) {
+		chr   = str.charCodeAt(i);
+		hash  = ((hash << 5) - hash) + chr;
+		hash |= 0; // Convert to 32bit integer
+	}
+	return hash;
+}
 
 // 設定 Cookie
 var SetCookie=function(n, v)
