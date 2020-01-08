@@ -105,7 +105,8 @@ a{text-decoration:none}a:link{color:#1257F9}a:visited{color:#1257F9}a:hover{colo
 
 <!-- UI 程式區 -->
 <script>
-var charset='';
+var hasModernSet = typeof Set == 'function' && (new Set('0')).size != 0;
+var charset = null;
 document.addEventListener('DOMContentLoaded', function() {
 	bookmap.push(unescape(window.atob('JXU4QUFBJXU2NTg3JXU4OUUzJXU1QjU3')));
 	bookmap.sort().forEach(function(key) {
@@ -117,13 +118,13 @@ document.addEventListener('DOMContentLoaded', function() {
 		var book_name;
 		if ($('#selectpicker').val() == 'all') {
 			book_name = '';
+			charset = null;
 			$('#charcount').html(dt.length);
 		} else {
 			book_name = $('#selectpicker').val();
 			$.get('http://ebag.coding.me/index-charset/charset/' + book_name + '.txt', function(data, status) {
-				console.log(status);
-				charset = data || '';
-				$('#charcount').html(charset.length);
+				charset = hasModernSet ? new Set(data) : (data || '');
+				$('#charcount').html(hasModernSet ? charset.size : getStrLength(charset));
 			}, 'text')
 			.fail(function() {
 				alert('文獻《' + book_name +'》不存在，請聯繫引得市站長添加');
@@ -137,6 +138,29 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 	});
 });
+
+function contains(c) {
+	if (hasModernSet) {
+		return charset.has(c);
+	} else {
+		return charset.indexOf(c) >= 0;
+	}
+}
+
+function getStrLength(str) {
+	return str.length - (str.match(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g)||[]).length;
+}
+
+function hashcode(str) {
+	var hash = 0, i, chr, len;
+	if (str.length === 0) return hash;
+	for (i = 0, len = str.length; i < len; i++) {
+		chr   = str.charCodeAt(i);
+		hash  = ((hash << 5) - hash) + chr;
+		hash |= 0; // Convert to 32bit integer
+	}
+	return hash;
+}
 </script>
 <script>
 // Global 變數
@@ -151,17 +175,6 @@ var did = (window.name.slice(0, 3) == "if_") ? parseInt(window.name.slice(3)) : 
 var ref = "title='U+$UCH$' href='http://www.mebag.com/index/main/list.asp?key3=$ENC$&key4=entry' target='_parent'";
 var cpy = "title='U+$UCH$' href='#1' onclick='SetClipBoard(\"$CHR$\")'";
 var ime = 0;
-
-function hashcode(str) {
-	var hash = 0, i, chr, len;
-	if (str.length === 0) return hash;
-	for (i = 0, len = str.length; i < len; i++) {
-		chr   = str.charCodeAt(i);
-		hash  = ((hash << 5) - hash) + chr;
-		hash |= 0; // Convert to 32bit integer
-	}
-	return hash;
-}
 
 // 設定 Cookie
 var SetCookie=function(n, v)
@@ -332,7 +345,7 @@ var SetFnKey=function(w)
 var MakeBlock=function(w, c, m, a, t)
 {
 	var f = (m < 0) ? "#0045FF" : (m ? "#404040" : "#FF4500");
-	var isreturn = (m < 0) || ($('#selectpicker').val() == 'all') || (charset == '') || (charset.indexOf(t) >= 0);
+	var isreturn = (m < 0) || ($('#selectpicker').val() == 'all') || (charset&&contains(t));
 	if (isreturn)
 	{
 		return ("<a style='border:1px solid #C0C0C0;color:"+f+";background:"+GetBGC(c)+"' ondblclick='SetFnKey(\""+w+"\")' "+a+">"+t+"</a>");
