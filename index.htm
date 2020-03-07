@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			$('#charcount').html(dt.length);
 		} else {
 			book_name = $('#selectpicker').val();
-			$.get('http://ebag.coding.me/index-charset/charset/' + book_name + '.txt', function(data, status) {
+			$.get('http://c4n4en.coding-pages.com/charset/' + book_name + '.txt', function(data, status) {
 				charset = hasModernSet ? new Set(data) : (data || '');
 				$('#charcount').html(hasModernSet ? charset.size : getStrLength(charset));
 			}, 'text')
