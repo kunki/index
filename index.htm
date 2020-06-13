@@ -38,7 +38,8 @@ a{text-decoration:none}a:link{color:#1257F9}a:visited{color:#1257F9}a:hover{colo
 <font style="font-family:Arial,FMing-p,FMing-1,FMing-2,FMing-3,FMing-F,FSung-p,FSung-1,FSung-2,FSung-3,FSung-F,Calibri,PMingLiU,PMingLiU-ExtB,HanaMinA,HanaMinB"/>
 <hr color=#C0C0C0>
 <span style='margin-left:4em;text-indent:-3em;display:block'><font color=#000088>部件</font>：<span id="New"><input id="input" oninput="FindMatch(99,true)" onkeydown="OnKey(event.keyCode)" style="font-family:FMing-m,FMing-1,FMing-2,FMing-3,FMing-F,FSung-m,FSung-1,FSung-2,FSung-3,FSung-F,MingLiU,MingLiU-ExtB,HanaMinA,HanaMinB;font-size:18px;margin-right:10px;"></input></span><span id="Old" style='display:none'><input id="input7" onpropertychange="FindMatch(99,true)" onkeydown="OnKey(event.keyCode)" style="font-family:FMing-m,FMing-1,FMing-2,FMing-3,FMing-F,FSung-m,FSung-1,FSung-2,FSung-3,FSung-F,MingLiU,MingLiU-ExtB,HanaMinA,HanaMinB;font-size:18px"></input></span><button class="btn btn-default btn-function" onclick="ClearFind()" title="清除按鈕：清除所有的查詢輸入及查詢結果。實體鍵盤的「Esc」鍵有相同作用。"><b><i class="zmdi zmdi-delete"></i></b></button><button class="btn btn-default btn-function" onclick="Backspace()" title="倒退按鈕：模擬實體鍵盤的「Backspace」鍵。"><i class="zmdi zmdi-chevron-left"></i></button><button class="btn btn-default btn-function" onclick="Decompose()" title="解構按鈕：將輸入點定在某個已輸入的漢字之後，按下此鍵即可直接解構該漢字，例如「淵」會裂解成「氵𣶒」。"><b><i class="zmdi zmdi-scissors"></i></b></button><button class="btn btn-default btn-function" onclick="FindMatch(999,false)" title="查詢按鈕：進行查詢檢索，查詢結果的上限為一千字。實體鍵盤的「Enter」鍵有相同作用。"><i class="zmdi zmdi-search"></i></button>　<e title="快捷鍵暫存區：雙擊查詢結果可將其釘選到快捷鍵暫存區，成為一個自訂的快捷鍵。之後的查詢便可以利用該快捷鍵來輸入，不必每次都清空查詢區，重新查詢。快捷鍵暫存區至多能保存十個最新的查詢結果。">⌘</e> <span id="FnKey"></span></span>
-<span style='margin-left:4em;text-indent:-3em;display:block'><font color=#600060>選項</font>：<label class="label-option" title="勾選時會將所有互為異體的部件視為相同；反之則視為不同。"><input type="checkbox" id="variant" onclick="OnVar()">包容異體</label>&nbsp;<label class="label-option" title="勾選時會啟用筆畫層級的細粒度拆分，查詢結果會更多，但可能引起一定的卡頓；反之則只使用常規拆分。"><input type="checkbox" id="subdivide" onclick="OnSdv()">無理拆分</label>&nbsp;<label class="label-option" title="勾選時輸入框裡有任何輸入變動均會自動執行查詢檢索（為縮短反應時間，查詢結果僅限一百字，但「精確命中」的字一定會列出，不在此限。若要查看百字以外的字，可再多按一下「查詢」按鈕）；反之則需等到按下「查詢」按鈕才會執行查詢檢索。"><input type="checkbox" id="onthefly" onclick="OnFly()">即時查詢</label>&nbsp;<label class="label-option" title="勾選時檢索結果會以較大的字形來顯示；反之則用較小的字形顯示。"><input type="checkbox" id="largefont" onclick="OnFnt()">較大字形</label>&nbsp;<label class="label-option" title="勾選時點擊檢索結果會將該漢字複製到剪貼簿；反之則跳轉至引得市資料庫的對應網頁。"><input type="checkbox" id="copymode" onclick="OnCpy()">複製模式</label></span>
+<span style='margin-left:4em;text-indent:-3em;display:block'><font color=#600060>選項</font>：<label class="label-option" title="勾選時會將所有互為異體的部件視為相同；反之則視為不同。"><input type="checkbox" id="variant" onclick="OnVar()">包容異體</label>&nbsp;<label class="label-option" title="勾選時會啟用筆畫層級的細粒度拆分，查詢結果會更多，但可能引起一定的卡頓；反之則只使用常規拆分。"><input type="checkbox" id="subdivide" onclick="OnSdv()">無理拆分</label>&nbsp;<label class="label-option" title="勾選時輸入框裡有任何輸入變動均會自動執行查詢檢索（為縮短反應時間，查詢結果僅限一百字，但「精確命中」的字一定會列出，不在此限。若要查看百字以外的字，可再多按一下「查詢」按鈕）；反之則需等到按下「查詢」按鈕才會執行查詢檢索。"><input type="checkbox" id="onthefly" onclick="OnFly()">即時查詢</label>&nbsp;
+<label class="label-option" title="勾選時檢索結果會以較大的字形來顯示；反之則用較小的字形顯示。"><input type="checkbox" id="largefont" onclick="OnFnt()">較大字形</label>&nbsp;<label class="label-option" title="勾選時檢索結果會以圖片來顯示；反之則用文字顯示。"><input type="checkbox" id="glyphmode" onclick="OnGlyph()">圖片模式</label>&nbsp;<label class="label-option" title="勾選時點擊檢索結果會將該漢字複製到剪貼簿；反之則跳轉至引得市資料庫的對應網頁。"><input type="checkbox" id="copymode" onclick="OnCpy()">複製模式</label></span>
 <span style='margin-left:4em;text-indent:-3em;display:block'><font color=#000088>字數</font>：<font color=#696969><span id="total"></span></font></span>
 <hr color=#C0C0C0>
 <div><a href="#" id="padbtn" onclick="OnPad()" title="鍵盤收/展">▲</a>⌨&nbsp;&nbsp;<input type="radio" name="category" value="1" onclick="OnCat()">214部首</input>&nbsp;&nbsp;<input type="radio" name="category" value="2" onclick="OnCat()">部首變體</input>&nbsp;&nbsp;<input type="radio" name="category" value="3" onclick="OnCat()">難輸部件</input>&nbsp;&nbsp;<input type="radio" name="category" value="4" onclick="OnCat()">常用部件</input>&nbsp;&nbsp;<input type="radio" name="category" value="0" onclick="OnCat()">所有部件</input>
@@ -119,6 +120,8 @@ a{text-decoration:none}a:link{color:#1257F9}a:visited{color:#1257F9}a:hover{colo
 var hasModernSet = typeof Set == 'function' && (new Set('0')).size != 0;
 var charset = null;
 var linkMap = {};
+var largeFont = false;
+var glyphMode = false;
 document.addEventListener('DOMContentLoaded', function() {
 	router.forEach(function(config) {
 		var optgroupHtml = '';
@@ -170,6 +173,43 @@ function contains(c) {
 
 function getStrLength(str) {
 	return str.length - (str.match(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g)||[]).length;
+}
+
+function renderLargeFont() {
+	largeFont = $('#largefont').is(':checked');
+	$('#output img').width(largeFont ? '2rem' : '1.5rem');
+}
+
+function renderGlyphMode() {
+	glyphMode = $('#glyphmode').is(':checked');
+	$('#output a').html(function(){
+		var $this = $(this);
+		return getText($this.data('c'), $this.data('t'));
+	});
+}
+
+function getText(c, t) {
+	if (!glyphMode) {
+		return t;
+	}
+	switch (GetBlock(c)) {
+	case 1:		// 基本
+	case 2:		// A區
+	case 3:		// B區
+	case 4:		// C區
+	case 5:		// D區
+	case 6:		// E區
+	case 7:		// F區
+	case 8:		// G區
+	case 27:	// 相容
+	case 28:
+	case 29:	// 相容
+		return '<img src="http://glyphwiki.org/glyph/u'+c.toString(16)+'.svg" alt="'+t+'" style="width:'+ (largeFont ? '2rem' : '1.5rem') +'" />';
+	case 30:	// 補充
+	case 31:
+	default:	// 其他
+		return t;
+	}
 }
 </script>
 <script>
@@ -361,7 +401,7 @@ var MakeBlock=function(w, c, m, a, t)
 	var isreturn = (m < 0) || ($('#selectpicker').val() == 'all') || (charset&&contains(t));
 	if (isreturn)
 	{
-		return ("<a style='border:1px solid #C0C0C0;color:"+f+";background:"+GetBGC(c)+"' oncontextmenu='ClearFind();Key(\""+w+"\")' ondblclick='SetFnKey(\""+w+"\")' "+a+">"+t+"</a>");
+		return ("<a style='border:1px solid #C0C0C0;color:"+f+";background:"+GetBGC(c)+"' data-c='"+c+"' data-t='"+t+"' oncontextmenu='ClearFind();Key(\""+w+"\")' ondblclick='SetFnKey(\""+w+"\")' "+a+">"+getText(c, t)+"</a>");
 	}
 };
 
@@ -508,6 +548,16 @@ var OnFnt=function()
 	var b = document.getElementById("largefont").checked;
 	SetCookie("largefont", b ? "1" : "0");
 	document.getElementById("output").style.fontSize = b ? "2em" : "1.5em";
+	renderLargeFont();
+	document.getElementById((ie > 7) ? "input" : "input7").focus();
+};
+
+// 圖片模式改變
+var OnGlyph=function()
+{
+	var b = document.getElementById("glyphmode").checked;
+	SetCookie("glyphmode", b ? "1" : "0");
+	renderGlyphMode();
 	document.getElementById((ie > 7) ? "input" : "input7").focus();
 };
 
@@ -561,11 +611,13 @@ var Init=function()
 	document.getElementById("subdivide").checked = GetCookie("variant", "1") == "1";
 	document.getElementById("onthefly").checked = GetCookie("onthefly", "1") == "1";
 	document.getElementById("largefont").checked = GetCookie("largefont", "1") == "1";
+	document.getElementById("glyphmode").checked = GetCookie("glyphmode", "1") == "1";
 	document.getElementById("copymode").checked = GetCookie("copymode", "0") == "1";
 	document.getElementById((ie > 7) ? "input" : "input7").addEventListener('compositionstart', function(){ ime = true; });
 	document.getElementById((ie > 7) ? "input" : "input7").addEventListener('compositionend', function(){ setTimeout(function(){ ime = false; FindMatch(99,true); }, 1); });
 
 	OnFnt();
+	OnGlyph();
 	isPadVisible = GetCookie("keypad", "1") == "0";
 	OnPad();
 	iCategory = parseInt(GetCookie("category", "1"));
