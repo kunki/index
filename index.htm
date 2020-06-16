@@ -5,6 +5,7 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@iconfu/svg-inject@1.2.3/dist/svg-inject.min.js" defer></script>
 <script src="http://www.mebag.com/index/js/bootstrap-select/1.13.2/js/i18n/defaults-zh-Hant.min.js" defer></script>
 <script src="http://www.mebag.com/index/js/router.js" defer></script>
 </head><body style="padding: 1.5% 7%">
@@ -20,6 +21,12 @@ a{text-decoration:none}a:link{color:#1257F9}a:visited{color:#1257F9}a:hover{colo
 .Key{border-left:1px solid #FFFFFF;border-top:1px solid #FFFFFF;border-right:1px solid #808080;border-bottom:1px solid #808080;padding:0px 2px 0px 1px;font-size:90%}
 .label-option{text-indent:0;margin-bottom:0;cursor:pointer;}
 .btn-function{width:30px;border:1px solid #707070;padding:2px 6px 1px 8px;border-radius:5px;background-color:#E0E0E0;}
+.box-decode {color:#0045FF!important;}
+.box-fuzzy {color:#404040!important;}
+.box-exact {color:#FF4500!important;}
+.box-decode g {fill:#0045FF;}
+.box-fuzzy g {fill:#404040;}
+.box-exact g {fill:#FF4500;}
 </style>
 <div id="loading">
 <div style="display: flex;align-items: center;">
@@ -204,7 +211,7 @@ function getText(c, t) {
 	case 27:	// 相容
 	case 28:
 	case 29:	// 相容
-		return '<img src="http://glyphwiki.org/glyph/u'+c.toString(16)+'.svg" alt="'+t+'" style="width:'+ (largeFont ? '2rem' : '1.5rem') +'" />';
+		return '<img src="http://glyphwiki.org/glyph/u'+c.toString(16)+'.svg" alt="'+t+'" style="width:'+ (largeFont ? '2rem' : '1.5rem') +';height:'+ (largeFont ? '2rem' : '1.5rem') +';" onload="SVGInject(this)"/>';
 	case 30:	// 補充
 	case 31:
 	default:	// 其他
@@ -397,11 +404,11 @@ var SetFnKey=function(w)
 // 回傳空字串表示捨棄此字
 var MakeBlock=function(w, c, m, a, t)
 {
-	var f = (m < 0) ? "#0045FF" : (m ? "#404040" : "#FF4500");
+	var f = (m < 0) ? "box-decode" : (m ? "box-fuzzy" : "box-exact");
 	var isreturn = (m < 0) || ($('#selectpicker').val() == 'all') || (charset&&contains(t));
 	if (isreturn)
 	{
-		return ("<a style='border:1px solid #C0C0C0;color:"+f+";background:"+GetBGC(c)+"' data-c='"+c+"' data-t='"+t+"' oncontextmenu='ClearFind();Key(\""+w+"\")' ondblclick='SetFnKey(\""+w+"\")' "+a+">"+getText(c, t)+"</a>");
+		return ("<a class='"+f+"' style='border:1px solid #C0C0C0;background:"+GetBGC(c)+"' data-c='"+c+"' data-t='"+t+"' oncontextmenu='ClearFind();Key(\""+w+"\")' ondblclick='SetFnKey(\""+w+"\")' "+a+">"+getText(c, t)+"</a>");
 	}
 };
 
