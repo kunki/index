@@ -184,19 +184,23 @@ function getStrLength(str) {
 
 function renderLargeFont() {
 	largeFont = $('#largefont').is(':checked');
-	$('#output img').width(largeFont ? '2rem' : '1.5rem');
+	var size = largeFont ? '2rem' : '1.5rem';
+	$('#output img').width(size);
+	$('#output img').height(size);
+	$('#output svg').width(size);
+	$('#output svg').height(size);
 }
 
 function renderGlyphMode() {
 	glyphMode = $('#glyphmode').is(':checked');
 	$('#output a').html(function(){
 		var $this = $(this);
-		return getText($this.data('c'), $this.data('t'));
+		return getText($this.data('c'), $this.data('t'), $this.data('m'));
 	});
 }
 
-function getText(c, t) {
-	if (!glyphMode) {
+function getText(c, t, m) {
+	if (!glyphMode || m < 0) {
 		return t;
 	}
 	switch (GetBlock(c)) {
@@ -211,7 +215,8 @@ function getText(c, t) {
 	case 27:	// 相容
 	case 28:
 	case 29:	// 相容
-		return '<img src="http://glyphwiki.org/glyph/u'+c.toString(16)+'.svg" alt="'+t+'" style="width:'+ (largeFont ? '2rem' : '1.5rem') +';height:'+ (largeFont ? '2rem' : '1.5rem') +';" onload="SVGInject(this)"/>';
+		var size = largeFont ? '2rem' : '1.5rem';
+		return '<img src="http://glyphwiki.org/glyph/u'+c.toString(16)+'.svg" alt="'+t+'" style="width:'+size+';height:'+size+';" onload="SVGInject(this)"/>';
 	case 30:	// 補充
 	case 31:
 	default:	// 其他
@@ -408,7 +413,7 @@ var MakeBlock=function(w, c, m, a, t)
 	var isreturn = (m < 0) || ($('#selectpicker').val() == 'all') || (charset&&contains(t));
 	if (isreturn)
 	{
-		return ("<a class='"+f+"' style='border:1px solid #C0C0C0;background:"+GetBGC(c)+"' data-c='"+c+"' data-t='"+t+"' oncontextmenu='ClearFind();Key(\""+w+"\")' ondblclick='SetFnKey(\""+w+"\")' "+a+">"+getText(c, t)+"</a>");
+		return ("<a class='"+f+"' style='border:1px solid #C0C0C0;background:"+GetBGC(c)+"' data-c='"+c+"' data-t='"+t+"' data-m='"+m+"' oncontextmenu='ClearFind();Key(\""+w+"\")' ondblclick='SetFnKey(\""+w+"\")' "+a+">"+getText(c, t, m)+"</a>");
 	}
 };
 
