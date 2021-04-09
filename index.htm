@@ -137,13 +137,17 @@ document.addEventListener('DOMContentLoaded', function() {
 			.fail(function() {
 				alert('文獻《' + book_name +'》不存在，請聯繫引得市站長添加');
 				$('#selectpicker').selectpicker('val', 'all');
+				charset = null;
+				pua = false;
+				$('#charcount').html(dt.length);
+				ref = defaultRef;
 			});
 		}
 		if (bookInfo[book_name]) {
 			ref = bookInfo[book_name].link;
 			pua = bookInfo[book_name].pua;
 		} else {
-			ref = "http://www.mebag.com/index/main/list.asp?key1="+book_name+"&key3=$ENC$&key4=entry";
+			ref = defaultRef;
 			pua = false;
 		}
 	});
@@ -266,7 +270,8 @@ var kt=[
 // $UCD$ 表示漢字的10進制Unicode變數
 // $UCh$ 表示漢字的16進制小寫Unicode變數
 // $UCH$ 表示漢字的16進制大寫Unicode變數
-var ref = "http://www.mebag.com/index/main/list.asp?key3=$ENC$&key4=entry";
+var defaultRef = "http://www.mebag.com/index/main/list.asp?key3=$ENC$&key4=entry";
+var ref = defaultRef;
 var ime = 0;
 
 // 設定 Cookie
