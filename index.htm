@@ -213,7 +213,10 @@ function registerDownloadImageEvent() {
 		if (e.ctrlKey) {
 			e.preventDefault();
 			var c = $(this).data('c');
-			if (c >= 0xF0000) return;
+			if (c >= 0xF0000) {
+				alert('暫不支持導出補充字，請聯繫引得市站長獲得技術支持');
+				return;
+			}
 			downloadImage('https://glyphwiki.org/glyph/u'+c.toString(16)+'.png','u'+c.toString(16));
 		}
 	});
