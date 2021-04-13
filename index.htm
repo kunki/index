@@ -1,4 +1,4 @@
-﻿<html><head><title>部件檢索</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<html><head><title>部件檢索</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/material-design-iconic-font@2.2.0/dist/css/material-design-iconic-font.min.css" rel="stylesheet">
@@ -210,7 +210,7 @@ function getText(c, t, m) {
 
 function registerDownloadImageEvent() {
 	$('#output a').on('click', function(e){
-		if (e.ctrlKey) {
+		if (e.ctrlKey || e.metaKey) {
 			e.preventDefault();
 			var c = $(this).data('c');
 			if (c >= 0xF0000) {
